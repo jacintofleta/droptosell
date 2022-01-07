@@ -1,12 +1,7 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import Footer from "../components/Footer";
-import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
-import Link from "next/link";
 
 const Pricing: NextPage = () => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <>
       <div className="container px-16 lg:px-48 mx-auto my-12 mb-36 space-y-16">

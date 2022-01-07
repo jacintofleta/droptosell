@@ -1,12 +1,7 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import Footer from "../components/Footer";
-import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
-import Link from "next/link";
 
 const Pricing: NextPage = () => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <>
       <div className="container px-16 lg:px-48 mx-auto my-12 mb-36 space-y-16">
@@ -19,21 +14,73 @@ const Pricing: NextPage = () => {
         </div>
 
         <div className="mx-auto space-y-6">
-          <p>
-            Drop a file to get a payment link. You can then share the link
-            whenever you want and get sales. All your customers will receive the
-            file by email after paying.
-          </p>
-
-          <p>
-            You will receive the money directly in your Stripe account. We do
-            not accumulate your money.
-          </p>
-
-          <p>
-            If you want to edit or delete a product you can do it right into
-            your Stripe dashboard.
-          </p>
+          <div className="container mx-auto w-full h-full">
+            <div className="relative wrap overflow-hidden h-full">
+              <div className="border-2-2 absolute border-white h-full border left-1/2" />
+              {/* right timeline */}
+              <div className="mb-8 flex justify-center md:justify-between items-center w-full ">
+                <div className="hidden md:flex order-1 w-5/12" />
+                <div className="hidden md:flex z-20 items-center order-1 bg-white shadow-xl w-8 h-8 rounded-full">
+                  <h1 className="mx-auto font-semibold text-lg text-gray-900">
+                    1
+                  </h1>
+                </div>
+                <div className="z-10 order-1 bg-gray-600 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                  <h3 className="mb-3 font-bold text-xl">Drop a file</h3>
+                  <p className="text-sm leading-snug tracking-wide text-opacity-100">
+                    We will send it to you customers after they pay
+                  </p>
+                </div>
+              </div>
+              {/* left timeline */}
+              <div className="mb-8 flex justify-center md:justify-between md:flex-row-reverse items-center w-full ">
+                <div className="hidden md:flex order-1 w-5/12" />
+                <div className="hidden md:flex z-20 items-center order-1 bg-white shadow-xl w-8 h-8 rounded-full">
+                  <h1 className="mx-auto text-gray-900 font-semibold text-lg">
+                    2
+                  </h1>
+                </div>
+                <div className="z-10 order-1 bg-gray-600 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                  <h3 className="mb-3 font-bold text-xl">
+                    Get the payment link
+                  </h3>
+                  <p className="text-sm leading-snug tracking-wide text-opacity-100">
+                    You will get a Stripe payment link
+                  </p>
+                </div>
+              </div>
+              {/* right timeline */}
+              <div className="mb-8 flex justify-center md:justify-between items-center w-full ">
+                <div className="hidden md:flex order-1 w-5/12" />
+                <div className="hidden md:flex z-20 items-center order-1 bg-white shadow-xl w-8 h-8 rounded-full">
+                  <h1 className="mx-auto font-semibold text-lg text-gray-900">
+                    3
+                  </h1>
+                </div>
+                <div className="z-10 order-1 bg-gray-600 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                  <h3 className="mb-3 font-bold text-xl">Share it</h3>
+                  <p className="text-sm leading-snug tracking-wide text-opacity-100">
+                    Share it with your audience
+                  </p>
+                </div>
+              </div>
+              {/* left timeline */}
+              <div className="mb-8 flex justify-center md:justify-between md:flex-row-reverse items-center w-full ">
+                <div className="hidden md:flex order-1 w-5/12" />
+                <div className="hidden md:flex z-20 items-center order-1 bg-white shadow-xl w-8 h-8 rounded-full">
+                  <h1 className="mx-auto text-gray-900 font-semibold text-lg">
+                    4
+                  </h1>
+                </div>
+                <div className="z-10 order-1 bg-gray-600 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
+                  <h3 className="mb-3 font-bold text-xl">Get paid directly</h3>
+                  <p className="text-sm leading-snug tracking-wide text-opacity-100">
+                    All the money goes directly to your Stripe account
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Footer />

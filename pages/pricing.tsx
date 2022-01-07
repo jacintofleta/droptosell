@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Footer from "../components/Footer";
-import { ArrowCircleLeftIcon, CheckIcon } from "@heroicons/react/outline";
-import Link from "next/link";
+import { CheckIcon } from "@heroicons/react/outline";
 
 const Pricing: NextPage = () => {
   return (

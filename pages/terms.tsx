@@ -1,7 +1,5 @@
 import type { NextPage } from "next";
 import Footer from "../components/Footer";
-import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
-import Link from "next/link";
 
 const Terms: NextPage = () => {
   return (
