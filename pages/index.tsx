@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import Dropzone from "react-dropzone";
 import Image from "next/image";
 import Modal from "./../components/Modal";
@@ -11,16 +10,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>
-          Drop to Sell - Get a payment link for your digital products in seconds
-        </title>
-        <meta
-          name="description"
-          content="Get a payment link for your digital products in seconds"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div className="container mx-auto mt-12 mb-36 space-y-32">
         <h1 className="text-center text-6xl lg:text-8xl font-extrabold">
           Drop to Sell
