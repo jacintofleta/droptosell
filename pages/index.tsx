@@ -4,6 +4,7 @@ import Dropzone from "react-dropzone";
 import Image from "next/image";
 import Modal from "./../components/Modal";
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -27,7 +28,7 @@ const Home: NextPage = () => {
 
         <Dropzone onDrop={(acceptedFiles) => setShowModal(true)}>
           {({ getRootProps, getInputProps }) => (
-            <section>
+            <section className="cursor-pointer">
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 <div className="flex justify-center">
@@ -49,6 +50,7 @@ const Home: NextPage = () => {
 
         {showModal && <Modal />}
       </div>
+      <Footer />
     </>
   );
 };
