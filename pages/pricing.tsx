@@ -1,12 +1,9 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import Footer from "../components/Footer";
-import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
+import { ArrowCircleLeftIcon, CheckIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 
 const Pricing: NextPage = () => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <>
       <div className="container px-16 lg:px-48 mx-auto my-12 mb-36 space-y-16">
@@ -18,12 +15,33 @@ const Pricing: NextPage = () => {
           </div>
         </div>
 
-        <div className="mx-auto">
-          <p>
-            No monthly fees. <strong>Only 8% per sale forever</strong>. You can
-            upload unlimited files to get unlimited payment links. As simple as
-            that.
-          </p>
+        <div className="mx-auto flex justify-center min-w-24">
+          <div className=" p-12 bg-gray-600 rounded-2xl shadow-sm flex flex-col">
+            <h3 className="text-xl font-semibold">Free to use</h3>
+            <p className="mt-4 flex items-baseline">
+              <span className="text-5xl font-extrabold tracking-tight">$0</span>
+              <span className="ml-1 text-xl font-semibold">month</span>
+            </p>
+            <p className="mt-6">We make money when you do.</p>
+
+            {/* Feature list */}
+            <ul role="list" className="mt-6 space-y-6">
+              <li className="flex">
+                <CheckIcon
+                  className="flex-shrink-0 w-6 h-6"
+                  aria-hidden="true"
+                />
+                <span className="ml-3">Only 8% transaction fee</span>
+              </li>
+              <li className="flex">
+                <CheckIcon
+                  className="flex-shrink-0 w-6 h-6"
+                  aria-hidden="true"
+                />
+                <span className="ml-3">Unlimited files</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <Footer />
