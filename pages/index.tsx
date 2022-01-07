@@ -21,7 +21,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container mx-auto mt-12 space-y-32">
+      <div className="container mx-auto mt-12 mb-36 space-y-32">
         <h1 className="text-center text-6xl lg:text-8xl font-extrabold">
           Drop to Sell
         </h1>
