@@ -4,6 +4,9 @@ import { Magic } from "@magic-sdk/admin";
 import Iron from "@hapi/iron";
 import CookieService from "../../lib/cookie";
 import { ProcessEnv } from "../../types/env";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 let magic = new Magic(process.env.MAGIC_SECRET_KEY);
 
@@ -28,7 +31,21 @@ export default async function login(
       process.env.ENCRYPTION_SECRET as ProcessEnv,
       Iron.defaults
     );
+
+    // Save the user into the db
+    const dbUser = await prisma.user.upsert({
+      where: {
+        email: user.email as string,
+      },
+      update: {},
+      create: {
+        email: user.email as string,
+      },
+    });
+
     CookieService.setTokenCookie(res, token);
+
+    //Save user in the db
   } catch (error) {
     console.log({ error });
   }
