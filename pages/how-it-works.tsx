@@ -28,7 +28,7 @@ const Pricing: NextPage = () => {
                 <div className="z-10 order-1 bg-gray-600 rounded-lg shadow-xl w-full md:w-5/12 px-6 py-4">
                   <h3 className="mb-3 font-bold text-xl">Drop a file</h3>
                   <p className="text-sm leading-snug tracking-wide text-opacity-100">
-                    We will send it to you customers after they pay
+                    We will send it to your customers after they pay
                   </p>
                 </div>
               </div>

@@ -1,21 +1,29 @@
 import type { NextPage } from "next";
 import Dropzone from "react-dropzone";
 import Image from "next/image";
-import Modal from "./../components/Modal";
 import { useState } from "react";
 import Footer from "../components/Footer";
+import useAuth from "../hooks/useAuth";
+import Login from "../components/Login";
 
 const Home: NextPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  const { user, loading } = useAuth();
+  const [dropped, setDropped] = useState(false);
 
   return (
     <>
+      {dropped && !loading && !user && <Login show />}
+
       <div className="container mx-auto mt-12 mb-36 space-y-32">
         <h1 className="text-center text-6xl lg:text-8xl font-extrabold">
           Drop to Sell
         </h1>
 
-        <Dropzone onDrop={(acceptedFiles) => setShowModal(true)}>
+        <Dropzone
+          onDrop={(acceptedFiles) => {
+            setDropped(true);
+          }}
+        >
           {({ getRootProps, getInputProps }) => (
             <section className="cursor-pointer">
               <div {...getRootProps()}>
@@ -36,8 +44,6 @@ const Home: NextPage = () => {
             </section>
           )}
         </Dropzone>
-
-        {showModal && <Modal />}
       </div>
       <Footer />
     </>
