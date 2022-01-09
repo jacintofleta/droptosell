@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 const Terms: NextPage = () => {
   return (
     <>
-      <div className="container px-16 lg:px-48 mx-auto mt-12 mb-36 space-y-16">
+      <div className="flex flex-col container px-16 lg:px-48 mx-auto pt-12 space-y-16 h-screen">
         <div className="flex flex-col md:flex-row items-center">
           <div className="flex justify-center w-full">
             <h1 className="text-center text-6xl lg:text-8xl font-extrabold">
@@ -12,7 +12,7 @@ const Terms: NextPage = () => {
             </h1>
           </div>
         </div>
-        <div className="flex">
+        <main className="flex flex-1">
           <div className="mx-auto space-y-4">
             <p>
               These terms and conditions outline the rules and regulations for
@@ -323,9 +323,9 @@ const Terms: NextPage = () => {
               loss or damage of any nature.
             </p>
           </div>
-        </div>
+        </main>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

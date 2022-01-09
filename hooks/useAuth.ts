@@ -11,6 +11,8 @@ export default function useAuth() {
   const { data: user, error, mutate } = useSWR("/api/user", fetcher);
   const loading = user === undefined;
 
+  console.log(user, loading);
+
   return {
     user,
     loading,
