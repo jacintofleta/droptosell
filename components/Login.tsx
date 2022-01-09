@@ -14,6 +14,7 @@ export default function Login() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setLoading(true);
 
     const { elements } = event.target;
     try {
@@ -36,7 +37,9 @@ export default function Login() {
       } else {
         /* handle errors */
       }
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log({ error });
     }
   };
