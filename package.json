@@ -20,6 +20,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-dropzone": "^11.4.2",
+    "stripe": "^8.197.0",
     "swr": "^1.1.2"
   },
   "devDependencies": {

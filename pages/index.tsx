@@ -5,12 +5,15 @@ import { useState } from "react";
 import Footer from "../components/Footer";
 import useAuth from "../hooks/useAuth";
 import Login from "../components/Login";
+import ConnectStripe from "../components/ConnectStripe";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
   const [dropped, setDropped] = useState(false);
 
   const showLogin = dropped && !loading && !user;
+  const showConnectStripe =
+    dropped && !loading && user && !user.stripeConnected;
 
   return (
     <>
@@ -29,13 +32,15 @@ const Home: NextPage = () => {
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   <div className="flex justify-center">
-                    {!showLogin && (
-                      <div className="animate-ping absolute rounded-full bg-gray-600 w-48 h-48"></div>
+                    {!showLogin && !showConnectStripe && (
+                      <div
+                        className={`animate-ping absolute rounded-full bg-gray-600 w-48 h-48`}
+                      ></div>
                     )}
 
                     <div
                       className={`${
-                        showLogin ? "animate-pulse" : ""
+                        showLogin || showConnectStripe ? "animate-pulse" : ""
                       } relative inline-flex rounded-full bg-gray-600 w-48 h-48 justify-center`}
                     >
                       <Image
@@ -54,6 +59,11 @@ const Home: NextPage = () => {
           {showLogin && (
             <div className="mt-12">
               <Login />
+            </div>
+          )}
+          {showConnectStripe && (
+            <div className="mt-12">
+              <ConnectStripe />
             </div>
           )}
         </main>
