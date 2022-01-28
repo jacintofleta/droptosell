@@ -16,3 +16,9 @@ model User {
   email String @unique
   stripeAccountId String @unique
 }
+
+model Product {
+  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  stripeProductId String @unique
+  file String
+}
