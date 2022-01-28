@@ -6,6 +6,9 @@ import Footer from "../components/Footer";
 import useAuth from "../hooks/useAuth";
 import Login from "../components/Login";
 import ConnectStripe from "../components/ConnectStripe";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useS3Upload } from "next-s3-upload";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
@@ -16,6 +19,13 @@ const Home: NextPage = () => {
     dropped && !loading && user && !user.stripeConnected;
   const canUploadFiles = !loading && user && !showLogin && !showConnectStripe;
 
+  let { uploadToS3 } = useS3Upload();
+
+  const uploadFile = async (file: File) => {
+    let { url } = await uploadToS3(file);
+    console.log({ url });
+  };
+
   return (
     <>
       <div className="flex flex-col container mx-auto pt-12 h-screen">
@@ -24,8 +34,18 @@ const Home: NextPage = () => {
         </h1>
         <main className="flex-1 mt-32">
           <Dropzone
-            onDrop={(acceptedFiles) => {
+            maxFiles={1}
+            accept={
+              "image/*, video/*, audio/*, application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf"
+            }
+            onDrop={(acceptedFiles, fileRejections) => {
               setDropped(true);
+              if (!canUploadFiles) return;
+              if (fileRejections.length > 0) {
+                toast.error(fileRejections[0].errors[0]?.message);
+                return;
+              }
+              uploadFile(acceptedFiles[0]);
             }}
           >
             {({ getRootProps, getInputProps }) => (
@@ -71,6 +91,7 @@ const Home: NextPage = () => {
               <ConnectStripe />
             </div>
           )}
+          <ToastContainer />
         </main>
         <Footer />
       </div>
