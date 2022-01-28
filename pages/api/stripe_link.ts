@@ -27,8 +27,8 @@ const stripe_link = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const accountLink = await stripe.accountLinks.create({
       account: dbUser?.stripeAccountId,
-      refresh_url: "https://example.com/reauth",
-      return_url: "https://example.com/return",
+      refresh_url: process.env.STRIPE_RETURN_URL,
+      return_url: process.env.STRIPE_RETURN_URL,
       type: "account_onboarding",
     });
 

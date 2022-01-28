@@ -14,6 +14,7 @@ const Home: NextPage = () => {
   const showLogin = dropped && !loading && !user;
   const showConnectStripe =
     dropped && !loading && user && !user.stripeConnected;
+  const canUploadFiles = !loading && user && !showLogin && !showConnectStripe;
 
   return (
     <>
@@ -34,14 +35,18 @@ const Home: NextPage = () => {
                   <div className="flex justify-center">
                     {!showLogin && !showConnectStripe && (
                       <div
-                        className={`animate-ping absolute rounded-full bg-gray-600 w-48 h-48`}
+                        className={`animate-ping absolute rounded-full ${
+                          canUploadFiles ? "bg-teal-600" : "bg-gray-600"
+                        } w-48 h-48`}
                       ></div>
                     )}
 
                     <div
                       className={`${
                         showLogin || showConnectStripe ? "animate-pulse" : ""
-                      } relative inline-flex rounded-full bg-gray-600 w-48 h-48 justify-center`}
+                      } relative inline-flex rounded-full ${
+                        canUploadFiles ? "bg-teal-600" : "bg-gray-600"
+                      } w-48 h-48 justify-center`}
                     >
                       <Image
                         src="/add-icon.svg"
