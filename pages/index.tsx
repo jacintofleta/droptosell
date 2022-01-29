@@ -8,23 +8,18 @@ import Login from "../components/Login";
 import ConnectStripe from "../components/ConnectStripe";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useS3Upload } from "next-s3-upload";
+import NewProduct from "../components/NewProduct";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
+
   const [dropped, setDropped] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   const showLogin = dropped && !loading && !user;
   const showConnectStripe =
     dropped && !loading && user && !user.stripeConnected;
   const canUploadFiles = !loading && user && !showLogin && !showConnectStripe;
-
-  let { uploadToS3 } = useS3Upload();
-
-  const uploadFile = async (file: File) => {
-    let { url } = await uploadToS3(file);
-    console.log({ url });
-  };
 
   return (
     <>
@@ -33,54 +28,69 @@ const Home: NextPage = () => {
           Drop to Sell
         </h1>
         <main className="flex-1 mt-32">
-          <Dropzone
-            maxFiles={1}
-            accept={
-              "image/*, video/*, audio/*, application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf"
-            }
-            onDrop={(acceptedFiles, fileRejections) => {
-              setDropped(true);
-              if (!canUploadFiles) return;
-              if (fileRejections.length > 0) {
-                toast.error(fileRejections[0].errors[0]?.message);
-                return;
+          {file ? (
+            <>
+              <NewProduct file={file} />
+              <div className="w-full text-center">
+                <button
+                  onClick={() => setFile(null)}
+                  type="button"
+                  className="inline-flex px-2.5 py-1.5 border border-transparent text-xs font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <Dropzone
+              maxFiles={1}
+              accept={
+                "image/*, video/*, audio/*, application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf"
               }
-              uploadFile(acceptedFiles[0]);
-            }}
-          >
-            {({ getRootProps, getInputProps }) => (
-              <section className="cursor-pointer">
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <div className="flex justify-center">
-                    {!showLogin && !showConnectStripe && (
-                      <div
-                        className={`animate-ping absolute rounded-full ${
-                          canUploadFiles ? "bg-teal-600" : "bg-gray-600"
-                        } w-48 h-48`}
-                      ></div>
-                    )}
+              onDrop={(acceptedFiles, fileRejections) => {
+                setDropped(true);
+                if (!canUploadFiles) return;
+                if (fileRejections.length > 0) {
+                  toast.error(fileRejections[0].errors[0]?.message);
+                  return;
+                }
+                setFile(acceptedFiles[0]);
+              }}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <section className="cursor-pointer">
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <div className="flex justify-center">
+                      {!showLogin && !showConnectStripe && (
+                        <div
+                          className={`animate-ping absolute rounded-full ${
+                            canUploadFiles ? "bg-teal-600" : "bg-gray-600"
+                          } w-48 h-48`}
+                        ></div>
+                      )}
 
-                    <div
-                      className={`${
-                        showLogin || showConnectStripe ? "animate-pulse" : ""
-                      } relative inline-flex rounded-full ${
-                        canUploadFiles ? "bg-teal-600" : "bg-gray-600"
-                      } w-48 h-48 justify-center`}
-                    >
-                      <Image
-                        src="/add-icon.svg"
-                        height={30}
-                        width={30}
-                        alt="Drag and drop a file here"
-                        className="relative text-8xl mx-auto my-auto"
-                      />
+                      <div
+                        className={`${
+                          showLogin || showConnectStripe ? "animate-pulse" : ""
+                        } relative inline-flex rounded-full ${
+                          canUploadFiles ? "bg-teal-600" : "bg-gray-600"
+                        } w-48 h-48 justify-center`}
+                      >
+                        <Image
+                          src="/add-icon.svg"
+                          height={30}
+                          width={30}
+                          alt="Drag and drop a file here"
+                          className="relative text-8xl mx-auto my-auto"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
-            )}
-          </Dropzone>
+                </section>
+              )}
+            </Dropzone>
+          )}
           {showLogin && (
             <div className="mt-12">
               <Login />

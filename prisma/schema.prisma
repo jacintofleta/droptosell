@@ -20,5 +20,7 @@ model User {
 model Product {
   id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
   stripeProductId String @unique
+  stripePriceId String @unique
+  stripePaymentLinkId String @unique
   file String
 }

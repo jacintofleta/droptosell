@@ -2,13 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Magic } from "@magic-sdk/admin";
 import Iron from "@hapi/iron";
+import { PrismaClient } from "@prisma/client";
 import CookieService from "../../lib/cookie";
 import { ProcessEnv } from "../../types/env";
-import { PrismaClient } from "@prisma/client";
-
 const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);
-
-const prisma = new PrismaClient();
 
 let magic = new Magic(process.env.MAGIC_SECRET_KEY);
 
@@ -16,12 +13,13 @@ type Data = {
   name: string;
 };
 
+const prisma = new PrismaClient();
+
 export default async function login(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   if (req.method !== "POST") return res.status(405).end();
-
   try {
     // exchange the DID from Magic for some user data
     const did = magic.utils.parseAuthorizationHeader(

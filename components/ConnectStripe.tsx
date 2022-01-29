@@ -1,15 +1,9 @@
-import { useRouter } from "next/router";
-import { ProcessEnv } from "../types/env";
-import { useSWRConfig } from "swr";
 import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { useState } from "react";
-import { Magic } from "magic-sdk";
 import useAuth from "../hooks/useAuth";
 
 export default function Login() {
   const { user } = useAuth();
-  const router = useRouter();
-  const { mutate } = useSWRConfig();
 
   const [loading, setLoading] = useState(false);
 
