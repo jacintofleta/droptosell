@@ -2,7 +2,7 @@ import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 
-export default function Login() {
+export default function ConnectStripe() {
   const { user } = useAuth();
 
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,6 @@ export default function Login() {
     try {
       const stripeLinkRequest = await fetch("/api/stripe_link", {
         method: "POST",
-        headers: { Authorization: `Bearer ${user.issuer}` },
       });
 
       const stripeLink = await stripeLinkRequest.json();

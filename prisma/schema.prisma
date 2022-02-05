@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["mongodb"] 
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongodb"]
 }
 
 datasource db {
@@ -12,15 +12,20 @@ datasource db {
 }
 
 model User {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  email String @unique
-  stripeAccountId String @unique
+  id              String    @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  email           String    @unique
+  stripeAccountId String    @unique
+  products        Product[]
 }
 
 model Product {
-  id String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  stripeProductId String @unique
-  stripePriceId String @unique
-  stripePaymentLinkId String @unique
-  file String
+  id                   String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  stripeProductId      String @unique
+  stripePriceId        String @unique
+  stripePaymentLinkId  String @unique
+  stripePaymentLinkUrl String @unique
+  file                 String
+  title                String
+  user                 User   @relation(fields: [userId], references: [id])
+  userId               String @db.ObjectId
 }

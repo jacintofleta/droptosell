@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Dropzone from "react-dropzone";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import useAuth from "../hooks/useAuth";
 import Login from "../components/Login";
@@ -9,20 +9,28 @@ import ConnectStripe from "../components/ConnectStripe";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NewProduct from "../components/NewProduct";
+import Loading from "../components/Loading";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
 
-  const [dropped, setDropped] = useState(false);
+  const [dropped, setDropped] = useState<Boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [showLogin, setShowLogin] = useState<Boolean>(false);
+  const [showConnectStripe, setShowConnectStripe] = useState<Boolean>(false);
+  const [canUploadFiles, setCanUploadFiles] = useState<Boolean>(false);
 
-  const showLogin = dropped && !loading && !user;
-  const showConnectStripe =
-    dropped && !loading && user && !user.stripeConnected;
-  const canUploadFiles = !loading && user && !showLogin && !showConnectStripe;
+  useEffect(() => {
+    setShowLogin(dropped && !user);
+    setShowConnectStripe(dropped && user && !user.stripeConnected);
+    setCanUploadFiles(user && user.stripeConnected);
+  }, [dropped, showConnectStripe, showLogin, user]);
+
+  if (loading) return <Loading />;
 
   return (
     <>
+      <ToastContainer />
       <div className="flex flex-col container mx-auto pt-12 h-screen">
         <h1 className="text-center text-6xl lg:text-8xl font-extrabold">
           Drop to Sell
@@ -50,6 +58,7 @@ const Home: NextPage = () => {
               onDrop={(acceptedFiles, fileRejections) => {
                 setDropped(true);
                 if (!canUploadFiles) return;
+                if (showConnectStripe) return;
                 if (fileRejections.length > 0) {
                   toast.error(fileRejections[0].errors[0]?.message);
                   return;
@@ -101,8 +110,8 @@ const Home: NextPage = () => {
               <ConnectStripe />
             </div>
           )}
-          <ToastContainer />
         </main>
+
         <Footer />
       </div>
     </>

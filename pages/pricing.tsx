@@ -32,7 +32,7 @@ const Pricing: NextPage = () => {
                     className="flex-shrink-0 w-6 h-6"
                     aria-hidden="true"
                   />
-                  <span className="ml-3">Only 8% transaction fee</span>
+                  <span className="ml-3">Only 5% transaction fee</span>
                 </li>
                 <li className="flex">
                   <CheckIcon
