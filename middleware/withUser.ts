@@ -22,6 +22,9 @@ const withUser = (handler: any) => {
         where: {
           email: user.email as string,
         },
+        include: {
+          products: true,
+        },
       });
 
       req.user = dbUser;

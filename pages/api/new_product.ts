@@ -59,7 +59,14 @@ const newProduct = async (
         stripeProductId: product.id,
         stripePriceId: price.id,
         stripePaymentLinkId: paymentLink.id,
-        file: "google.es",
+        stripePaymentLinkUrl: paymentLink.url,
+        file: "https://google.es",
+        title: name,
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
       },
     });
 
