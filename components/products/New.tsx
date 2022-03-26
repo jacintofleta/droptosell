@@ -2,7 +2,8 @@ import { ChangeEvent, useState } from "react";
 import { useS3Upload } from "next-s3-upload";
 import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { toast } from "react-toastify";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
+import { copyToClipboard } from "../../lib/copyToClipboard";
 
 export type Product = {
   name: string;
@@ -45,15 +46,19 @@ export default function NewProduct({ file }: { file: File | null }) {
     event.preventDefault();
     setLoading(true);
     try {
-      //let { url } = await uploadToS3(file as File);
+      let { url, key } = await uploadToS3(file as File);
 
-      const paymentLinkRequest = await fetch("/api/new_product", {
+      console.log({ url, key });
+
+      const paymentLinkRequest = await fetch("/api/product/new", {
         method: "POST",
         headers: { Authorization: `Bearer ${user.issuer}` },
         body: JSON.stringify({
           currency,
           amount,
           name,
+          awsFileUrl: url,
+          awsFileKey: key,
         }),
       });
 
@@ -66,10 +71,6 @@ export default function NewProduct({ file }: { file: File | null }) {
       toast.error("An error has ocurred");
     }
     setLoading(false);
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(paymentLink);
   };
 
   return (
@@ -94,6 +95,12 @@ export default function NewProduct({ file }: { file: File | null }) {
                   placeholder="you@example.com"
                 />
                 <button
+                  onClick={() =>
+                    copyToClipboard({
+                      text: paymentLink,
+                      message: "Copied to clipboard",
+                    })
+                  }
                   type="button"
                   className="col-span-3 justify-center inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                 >

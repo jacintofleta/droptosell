@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Footer from "../components/Footer";
+import Footer from "../components/layout/Footer";
 
 const Terms: NextPage = () => {
   return (

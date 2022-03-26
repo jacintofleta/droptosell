@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import Footer from "../components/Footer";
-import Login from "../components/Login";
-import UserProducts from "../components/UserProducts";
+import Footer from "../components/layout/Footer";
+import Login from "../components/user/Login";
+import UserProducts from "../components/products/Products";
 import useAuth from "../hooks/useAuth";
 import { ToastContainer } from "react-toastify";
-import Loading from "../components/Loading";
+import Loading from "../components/layout/Loading";
 
 const Products: NextPage = () => {
   const { user, loading } = useAuth();

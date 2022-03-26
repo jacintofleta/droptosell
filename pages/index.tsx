@@ -2,14 +2,14 @@ import type { NextPage } from "next";
 import Dropzone from "react-dropzone";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Footer from "../components/Footer";
+import Footer from "../components/layout/Footer";
 import useAuth from "../hooks/useAuth";
-import Login from "../components/Login";
-import ConnectStripe from "../components/ConnectStripe";
+import Login from "../components/user/Login";
+import ConnectStripe from "../components/user/ConnectStripe";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import NewProduct from "../components/NewProduct";
-import Loading from "../components/Loading";
+import NewProduct from "../components/products/New";
+import Loading from "../components/layout/Loading";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuth();

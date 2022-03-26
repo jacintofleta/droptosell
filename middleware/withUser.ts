@@ -30,6 +30,7 @@ const withUser = (handler: any) => {
       req.user = dbUser;
       return handler(req, res);
     } catch (error) {
+      console.log({ error });
       return res.status(401).end();
     }
   };

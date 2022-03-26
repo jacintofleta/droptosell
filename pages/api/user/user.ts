@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import type { NextApiResponse } from "next";
-import withUser, { NextApiRequestWithUser } from "../../middleware/withUser";
+import withUser, { NextApiRequestWithUser } from "../../../middleware/withUser";
 
 export type UserWithStripe = User & { stripeConnected?: boolean };
 const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);

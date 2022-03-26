@@ -1,5 +1,5 @@
 import type { NextApiResponse } from "next";
-import withUser, { NextApiRequestWithUser } from "../../middleware/withUser";
+import withUser, { NextApiRequestWithUser } from "../../../middleware/withUser";
 import { UserWithStripe } from "./user";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);

@@ -1,7 +1,7 @@
 import { MailIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { Magic } from "magic-sdk";
-import { ProcessEnv } from "../types/env";
+import { ProcessEnv } from "../../types/env";
 import { useSWRConfig } from "swr";
 import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { useState } from "react";
@@ -24,14 +24,14 @@ export default function Login() {
       ).auth.loginWithMagicLink({ email: elements.email.value });
 
       // Once we have the did from magic, login with our own API
-      const authRequest = await fetch("/api/login", {
+      const authRequest = await fetch("/api/user/login", {
         method: "POST",
         headers: { Authorization: `Bearer ${did}` },
       });
 
       if (authRequest.ok) {
         // We successfully logged in, our API
-        mutate("/api/user");
+        mutate("/api/user/user");
         router.push("/products");
       } else {
         /* handle errors */

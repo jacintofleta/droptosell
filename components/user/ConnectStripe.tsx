@@ -1,6 +1,6 @@
 import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { useState } from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 export default function ConnectStripe() {
   const { user } = useAuth();
@@ -12,7 +12,7 @@ export default function ConnectStripe() {
     setLoading(true);
 
     try {
-      const stripeLinkRequest = await fetch("/api/stripe_link", {
+      const stripeLinkRequest = await fetch("/api/user/stripe_link", {
         method: "POST",
       });
 
