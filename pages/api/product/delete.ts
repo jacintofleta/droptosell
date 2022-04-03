@@ -6,9 +6,16 @@ import { UserWithStripe } from "../user/user";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);
 const AWS = require("aws-sdk");
 
-const prisma = new PrismaClient();
+AWS.config.update({
+  region: process.env.S3_UPLOAD_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID_DROPTOSELL,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_DROPTOSELL,
+});
+
 const s3 = new AWS.S3();
 const BUCKET = process.env.S3_UPLOAD_BUCKET;
+
+const prisma = new PrismaClient();
 
 const deleteProduct = async (
   req: NextApiRequestWithUser,
