@@ -1,5 +1,5 @@
-import type { GetServerSideProps, NextPage } from "next";
-import { PrismaClient, Product } from "@prisma/client";
+import type { GetServerSideProps } from "next";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
