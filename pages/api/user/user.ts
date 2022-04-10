@@ -15,6 +15,7 @@ const user = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 
     return res.json(user);
   } catch (error) {
+    console.log(error);
     return res.status(401).end();
   }
 };

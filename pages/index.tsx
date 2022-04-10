@@ -20,6 +20,7 @@ const Home: NextPage = () => {
   const [showConnectStripe, setShowConnectStripe] = useState<Boolean>(false);
   const [canUploadFiles, setCanUploadFiles] = useState<Boolean>(false);
 
+  // FIXME: Refactor this mess
   useEffect(() => {
     setShowLogin(dropped && !user);
     setShowConnectStripe(dropped && user && !user.stripeConnected);
