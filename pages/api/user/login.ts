@@ -5,7 +5,12 @@ import Iron from "@hapi/iron";
 import { PrismaClient } from "@prisma/client";
 import CookieService from "../../../lib/cookie";
 import { ProcessEnv } from "../../../types/env";
+import atob from "atob";
+
 const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY);
+
+// Because of a problem with vercel we need to add atop to globalThis https://github.com/magiclabs/magic-admin-js/issues/86
+globalThis.atob = atob;
 
 let magic = new Magic(process.env.MAGIC_SECRET_KEY);
 

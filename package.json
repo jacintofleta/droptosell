@@ -15,6 +15,8 @@
     "@prisma/client": "^3.11.1",
     "@sendgrid/mail": "^7.6.2",
     "@tailwindcss/forms": "^0.4.1",
+    "@types/atob": "^2.1.2",
+    "atob": "^2.1.2",
     "aws-sdk": "^2.1101.0",
     "cookie": "^0.4.2",
     "magic-sdk": "^7.0.0",
