@@ -26,13 +26,6 @@ const Home: NextPage = () => {
     setCanUploadFiles(user && user.stripeConnected);
   }, [dropped, showConnectStripe, showLogin, user]);
 
-  useEffect(() => {
-    toast(
-      "Drop to sell is a work in progress. Please contact @jacintofleta (twitter) if you want to know the status of this project",
-      { autoClose: false }
-    );
-  }, []);
-
   if (loading) return <Loading />;
 
   return (
