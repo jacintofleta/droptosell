@@ -3,7 +3,7 @@ import type { NextApiResponse } from "next";
 import withUser, { NextApiRequestWithUser } from "../../../middleware/withUser";
 
 export type UserWithStripe = User & { stripeConnected?: boolean };
-const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY);
 
 const user = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   try {

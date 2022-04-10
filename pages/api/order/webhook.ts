@@ -3,9 +3,9 @@ import { NextApiRequestWithUser } from "../../../middleware/withUser";
 import { buffer } from "micro";
 import { PrismaClient } from "@prisma/client";
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY);
 
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY_TEST;
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY;
 
 const prisma = new PrismaClient();
 

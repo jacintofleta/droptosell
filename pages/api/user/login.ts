@@ -5,7 +5,7 @@ import Iron from "@hapi/iron";
 import { PrismaClient } from "@prisma/client";
 import CookieService from "../../../lib/cookie";
 import { ProcessEnv } from "../../../types/env";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY);
 
 let magic = new Magic(process.env.MAGIC_SECRET_KEY);
 

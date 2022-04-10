@@ -3,7 +3,7 @@ import type { NextApiResponse } from "next";
 import withUser, { NextApiRequestWithUser } from "../../../middleware/withUser";
 import { UserWithStripe } from "../user/user";
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY_TEST);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_API_KEY);
 const AWS = require("aws-sdk");
 
 AWS.config.update({
