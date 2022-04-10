@@ -4,11 +4,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const productId = context.params?.productId as string;
+  const stripeProductId = context.params?.stripeProductId as string;
 
   const product = await prisma.product.findUnique({
     where: {
-      id: productId,
+      stripeProductId: stripeProductId,
     },
     select: {
       title: true,

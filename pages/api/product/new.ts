@@ -50,6 +50,12 @@ const newProduct = async (
           },
         ],
         application_fee_amount: amount * 100 * 0.05,
+        after_completion: {
+          type: "redirect",
+          redirect: {
+            url: `https://droptosell.com/thankyou/${stripeProduct.id}`,
+          },
+        },
       },
       {
         stripeAccount: user.stripeAccountId,
