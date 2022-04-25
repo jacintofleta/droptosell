@@ -14,7 +14,6 @@ import Loading from "../components/layout/Loading";
 const Home: NextPage = () => {
   const { user, loading } = useAuth();
 
-  const [dropped, setDropped] = useState<Boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [showLogin, setShowLogin] = useState<Boolean>(false);
   const [showConnectStripe, setShowConnectStripe] = useState<Boolean>(false);
@@ -22,10 +21,10 @@ const Home: NextPage = () => {
 
   // FIXME: Refactor this mess
   useEffect(() => {
-    setShowLogin(dropped && !user);
-    setShowConnectStripe(dropped && user && !user.stripeConnected);
+    setShowLogin(!!file && !user);
+    setShowConnectStripe(!!file && user && !user.stripeConnected);
     setCanUploadFiles(user && user.stripeConnected);
-  }, [dropped, showConnectStripe, showLogin, user]);
+  }, [file, showConnectStripe, showLogin, user]);
 
   if (loading) return <Loading />;
 
@@ -37,7 +36,7 @@ const Home: NextPage = () => {
           Drop to Sell
         </h1>
         <main className="flex-1 mt-32">
-          {file ? (
+          {file && canUploadFiles ? (
             <>
               <NewProduct file={file} />
               <div className="w-full text-center">
@@ -57,9 +56,6 @@ const Home: NextPage = () => {
                 "image/*, video/*, audio/*, application/pdf,.doc,.docx,.xls,.xlsx,.csv,.tsv,.ppt,.pptx,.pages,.odt,.rtf"
               }
               onDrop={(acceptedFiles, fileRejections) => {
-                setDropped(true);
-                if (!canUploadFiles) return;
-                if (showConnectStripe) return;
                 if (fileRejections.length > 0) {
                   toast.error(fileRejections[0].errors[0]?.message);
                   return;

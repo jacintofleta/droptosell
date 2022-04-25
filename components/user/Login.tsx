@@ -1,5 +1,4 @@
 import { MailIcon } from "@heroicons/react/solid";
-import { useRouter } from "next/router";
 import { Magic } from "magic-sdk";
 import { ProcessEnv } from "../../types/env";
 import { useSWRConfig } from "swr";
@@ -7,7 +6,6 @@ import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 
 export default function Login() {
-  const router = useRouter();
   const { mutate } = useSWRConfig();
 
   const [loading, setLoading] = useState(false);
@@ -32,7 +30,6 @@ export default function Login() {
       if (authRequest.ok) {
         // We successfully logged in, our API
         mutate("/api/user/user");
-        router.push("/products");
       } else {
         /* handle errors */
       }
