@@ -37,18 +37,7 @@ const Home: NextPage = () => {
         </h1>
         <main className="flex-1 mt-32">
           {file && canUploadFiles ? (
-            <>
-              <NewProduct file={file} />
-              <div className="w-full text-center">
-                <button
-                  onClick={() => setFile(null)}
-                  type="button"
-                  className="inline-flex px-2.5 py-1.5 border border-transparent text-xs font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-2"
-                >
-                  Cancel
-                </button>
-              </div>
-            </>
+            <NewProduct file={file} setFile={setFile} />
           ) : (
             <Dropzone
               maxFiles={1}
