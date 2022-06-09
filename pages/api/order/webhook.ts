@@ -80,6 +80,8 @@ const webhook = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
       },
     });
 
+    console.log(session.customer_details.email);
+
     const msg = {
       to: session.customer_details.email,
       from: "jacin@droptosell.com",
