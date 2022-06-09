@@ -80,14 +80,12 @@ const webhook = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
       },
     });
 
-    console.log(session.customer_details.email);
-
     const msg = {
       to: session.customer_details.email,
       from: "jacin@droptosell.com",
       subject: "Download your file",
       text: "Thank you for your purchase.",
-      html: `<strong><a href=${dbProduct.awsFileUrl}>Download</a></strong>`,
+      html: `Thank you so much for your purchase, you can<strong><a href=${dbProduct.awsFileUrl}>Download the file</a></strong>. If you have any doubts, please reply to this message and we will help you.`,
     };
     sgMail
       .send(msg)
